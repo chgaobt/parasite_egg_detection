@@ -46,7 +46,6 @@ class _splashState extends State<splash> with SingleTickerProviderStateMixin{
                 fit: BoxFit.fill
               ),
             ),
-            SizedBox(height: 10),
             Text(
               'Parasite Egg Detector',
               style: TextStyle(
