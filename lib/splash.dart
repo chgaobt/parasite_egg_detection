@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
@@ -33,36 +35,28 @@ class _splashState extends State<splash> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            //colors: [Color.fromARGB(255,213,240,239),Color.fromARGB(255,213,152,113)],
-            colors: [Color.fromARGB(255,213,152,113),Color.fromARGB(255,213,152,113)],
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-          ),
-        ),
-        child: const Column(
+      body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.bakery_dining_outlined,
-              size: 80,
-              color: Colors.white,
+            SizedBox(
+              height: MediaQuery.of(context).size.height/1.077,
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset(
+                'images/splashScreen.png',
+                fit: BoxFit.fill
+              ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Text(
-              'Tami',
+              'Parasite Egg Detector',
               style: TextStyle(
                 fontStyle: FontStyle.italic,
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 32,
               ),
             )
           ],
         ),
-      ),
     );
   }
 }
