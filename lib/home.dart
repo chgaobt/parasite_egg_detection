@@ -12,6 +12,9 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  String? imagePath; 
+  XFile? image; 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +50,22 @@ class _homeState extends State<home> {
                       height: 500,
                     ),
                     ElevatedButton(
-                onPressed: () async{}, 
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.camera_alt_outlined,size: 100,)
-                  ],
-                )
-              ),
+                      onPressed: () async {
+                        final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+                        if(PickedFile != null){
+                          setState(() {
+                            image = XFile(PickedFile.path);
+                          });
+                          print(PickedFile.path);
+                        }
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.camera_alt_outlined,size: 100,)
+                        ],
+                      )
+                    ),
                   ],
                 ), 
               )
