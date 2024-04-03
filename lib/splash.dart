@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -35,23 +35,31 @@ class _splashState extends State<splash> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height/1.077,
-              width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'images/splashScreen.png',
-                fit: BoxFit.fill
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/splashScreen.png',),
+                  fit: BoxFit.fill,
+                  ),
               ),
             ),
-            Text(
-              'Parasite Egg Detector',
-              style: TextStyle(
-                fontStyle: FontStyle.italic,
-                color: Colors.black,
-                fontSize: 32,
+            Container(
+              child: Column(
+                children: [
+                  SizedBox(height: 400),
+                  Center(
+                    child: Text(
+                      'Parasite Egg Detector',
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontSize: 32,
+                      ),
+                    ),
+                  )
+                ],
               ),
             )
           ],
