@@ -72,44 +72,6 @@ class _homeState extends State<home> {
             ),
           ],
          ),
-      //   child: Center(
-      //     child: SingleChildScrollView(
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           SizedBox(
-      //             height: MediaQuery.of(context).size.height,
-      //             width: MediaQuery.of(context).size.width,
-      //             child: Image.asset(
-      //               'images/homeScreen.png',
-      //               fit: BoxFit.fill,
-      //             ),
-      //           ),
-      //           const Positioned(
-      //             top: 350,
-      //             left: 170,
-      //             child: Text(
-      //             "Select/Take a Photo",
-      //             textAlign: TextAlign.center,
-      //             style: TextStyle(
-      //               fontSize: 35,
-      //               fontWeight: FontWeight.bold,
-      //               color: Colors.black
-      //             ),
-      //           ),
-      //           ),
-                
-                  
-      //           // ElevatedButton(
-      //           //   onPressed: () async {
-      //           //   }, 
-      //           //   child: Row(
-      //           //     mainAxisSize: MainAxisSize.min,
-      //           //     children: [
-      //           //       Icon(Icons.camera_alt_outlined, size: 100),
-      //           //     ]
-      //           //   )
-      //      
     );
   }
 }
