@@ -52,12 +52,12 @@ class _homeState extends State<home> {
                     ElevatedButton(
                       onPressed: () async {
                         final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-                        if(PickedFile != null){
-                          setState(() {
-                            image = XFile(PickedFile.path);
-                          });
-                          print(PickedFile.path);
-                        }
+                        // if(PickedFile != null){
+                        //   setState(() {
+                        //     image = XFile(PickedFile.path);
+                        //   });
+                        //   print(PickedFile.path);
+                        // }
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
