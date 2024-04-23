@@ -56,9 +56,11 @@ class _homeState extends State<home> {
                     ElevatedButton(
                       onPressed: () async {
                         //final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-                        var data = await getData(Uri.parse('http://127.0.0.1:5000/'));
+                        var data = await getData('http://127.0.0.1:5000/');
                         var decodedData = jsonDecode(data);
                         print(decodedData['query']);
+                        //showAlertDialog(context, decodedData['query']);
+                        //print(decodedData['query'][0]);
                         // if(PickedFile != null){
                         //   setState(() {
                         //     image = XFile(PickedFile.path);
@@ -82,3 +84,31 @@ class _homeState extends State<home> {
     );
   }
 }
+
+// showAlertDialog(BuildContext context, String name) {
+
+//     // set up the button
+//     Widget okayButton = FlatButton(
+//       child: Text("Okay!"),
+//       onPressed: () {
+//         Navigator.pop(context);
+//       },
+//     );
+
+//     // set up the AlertDialog
+//     AlertDialog alert = AlertDialog(
+//       title: Text("Flower"),
+//       content: Text("The name of flower is: $name"),
+//       actions: [
+//         okayButton,
+//       ],
+//     );
+
+//     // show the dialog
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return alert;
+//       },
+//     );
+//   }
