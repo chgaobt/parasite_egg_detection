@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:parasite_egg_detection/request.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -54,11 +56,9 @@ class _homeState extends State<home> {
                     ElevatedButton(
                       onPressed: () async {
                         //final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-                        var data = await getData('http://10.0.2.2:5000/');
-
+                        var data = await getData(Uri.parse('http://127.0.0.1:5000/'));
                         var decodedData = jsonDecode(data);
                         print(decodedData['query']);
-
                         // if(PickedFile != null){
                         //   setState(() {
                         //     image = XFile(PickedFile.path);
@@ -81,8 +81,4 @@ class _homeState extends State<home> {
          ),
     );
   }
-}
-Future getData(url) async {
-Response response = await get(url);
-return response.body;
 }
