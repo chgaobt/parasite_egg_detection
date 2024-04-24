@@ -63,7 +63,6 @@ class _homeState extends State<home> {
                         var request = http.MultipartRequest('POST', Uri.parse('http://127.0.0.1:5000/'));
                         request.files.add(await http.MultipartFile.fromPath('imagefile', file.path));
 
-
                         try {
                           var res = await request.send();
                           if(res.statusCode == 200) {
