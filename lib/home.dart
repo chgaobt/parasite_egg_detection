@@ -62,27 +62,27 @@ class _homeState extends State<home> {
                         File file = File(PickedFile!.path); 
                         var request = http.MultipartRequest('POST', Uri.parse('http://127.0.0.1:5000/'));
                         request.files.add(await http.MultipartFile.fromPath('imagefile', file.path));
+                        var res = await request.send();
+                        print('post request made');
 
-                        try {
-                          var res = await request.send();
-                          if(res.statusCode == 200) {
-                            var data = await getData('http://127.0.0.1:5000/');
-                            var decodedData = jsonDecode(data);
-                            print(decodedData['query']);
-                            print('done');
-                          }
-                          else {
-                            print('failed to send');
-                          }
-                        }
-                        catch (e) {
-                          print('Error sending photo: ${e}');
-                        }                        
-                        //var data = await res.stream.bytesToString();
-                    
-                        print('sent photo');
-                        //showAlertDialog(context, decodedData['query']);
-                        //print(decodedData['query'][0]);
+                        // try {
+                        //   print('waiting');
+                        //   if(res.statusCode == 200) {
+                        //     var data = await getData('http://127.0.0.1:5000/');
+                        //     var decodedData = jsonDecode(data);
+                        //     print(decodedData['query']);
+                        //     print('done');
+                        //   }
+                        //   else {
+                        //     print('failed to send');
+                        //   }
+                        // }
+                        // catch (e) {
+                        //   print('Error sending photo: ${e}');
+                        // }                        
+                        // var data = await res.stream.bytesToString();
+                        // showAlertDialog(context, decodedData['query']);
+                        // print(decodedData['query'][0]);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
