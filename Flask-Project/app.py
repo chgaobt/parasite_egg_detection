@@ -1,43 +1,46 @@
 from flask import Flask, request, jsonify
 import roboflow
+import supervision as sv
 import tempfile
-import numpy as np
-import cv2
-import base64
-import matplotlib
 import os
 app = Flask(__name__)
 
-@app.route("/", methods=['POST'])
+@app.route("/", methods=['POST','GET'])
 def home():
-    # json_file = {}
-    # json_file['query'] = 'hello world'
+    count = 0; 
 
-    if 'imagefile' not in request.files:
-        return 'File Not Found'
+    if(request.method == 'POST'): 
+        if 'imagefile' not in request.files:
+            return 'File Not Found'
         
-    try:
-        imagefile = request.files['imagefile']
-        if imagefile.filename == '':
-            return 'No File Selected'
+        try:
+            imagefile = request.files['imagefile']
+            if imagefile.filename == '':
+                return 'No File Selected'
             
-        temp_dir = tempfile.mkdtemp()
-        temp_file_path = os.path.join(temp_dir, 'temp')
-        imagefile.save(temp_file_path)
-           
-        rf = roboflow.Roboflow(api_key="YoZtPvlGVyx3HEeaxQWT")
-        project = rf.workspace().project("ovos-de-parasitas-azoug")
-        model = project.version("6").model
-        model.confidence = 70
-        model.overlap = 25
-        prediction = model.predict(temp_file_path)
+            temp_dir = tempfile.mkdtemp()
+            temp_file_path = os.path.join(temp_dir, 'temp')
+            imagefile.save(temp_file_path)
 
-        return 'Done'
-        #return jsonify(prediction.json())
+            rf = roboflow(api_key="YoZtPvlGVyx3HEeaxQWT")
+            project = rf.workspace().project("ovos-de-parasitas-azoug")
+            model = project.version(6).model
+
+            result = model.predict(imagefile, confidence=40, overlap=30).json()
+
+            detections = sv.Detections.from_inference(result)
+
+            print(len(detections))
+
+            count = len(detections)
+            return jsonify(len(detections))
     
-    except Exception as e:
-        return f'Error: {e}'
+        except Exception as e:
+            return f'Error: {e}'
     
+    else: 
+        return jsonify(count)
+
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

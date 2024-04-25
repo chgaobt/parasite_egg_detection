@@ -20,6 +20,7 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   String? imagePath; 
   XFile? image; 
+  int count = -1; 
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class _homeState extends State<home> {
                         final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
                         File file = File(PickedFile!.path); 
 
-                        var request = http.MultipartRequest('POST', Uri.parse('http://127.0.0.1:5000/'));
+                        var request = http.MultipartRequest('POST', Uri.parse('http://172.20.10.2'));
                         Map<String, String> headers = {"Content-type": "multipart/form-data"};
                         request.files.add(
                           await http.MultipartFile(
@@ -76,14 +77,16 @@ class _homeState extends State<home> {
                         var res = await request.send();
                         print('post request made with await');
                         
-                        int count = -1; 
-                        var data = await http.get(Uri.parse('http://127.0.0.1:5000/'));
+                        //int count = -1; 
+                        var data = await http.get(Uri.parse('http://172.20.10.2'));
                         if(data.statusCode == 200) {
                           count = jsonDecode(data.body);
+                          count = 0;
                         }
                         else {
                           throw Exception('Failed to get from Flask server');
                         }
+                      
                         print(count);
 
                       },
@@ -93,6 +96,9 @@ class _homeState extends State<home> {
                           Icon(Icons.camera_alt_outlined,size: 100,)
                         ],
                       )
+                    ),
+                    Text(
+                      'This many parasite eggs were detected: $count'
                     ),
                   ],
                 ), 
