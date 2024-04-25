@@ -73,32 +73,19 @@ class _homeState extends State<home> {
                         );
                         request.headers.addAll(headers);
                         print("request: " + request.toString());
-                        var data = request.send();
-                        print(data);
-                        print(data);
-                        //var res = await request.send();
-                        print('post request made');
-                        //String responseBody = await res.stream.bytesToString();
-                        //print(responseBody);
+                        var res = await request.send();
+                        print('post request made with await');
+                        
+                        int count = -1; 
+                        var data = await http.get(Uri.parse('http://127.0.0.1:5000/'));
+                        if(data.statusCode == 200) {
+                          count = jsonDecode(data.body);
+                        }
+                        else {
+                          throw Exception('Failed to get from Flask server');
+                        }
+                        print(count);
 
-                        // try {
-                        //   print('waiting');
-                        //   if(res.statusCode == 200) {
-                        //     var data = await getData('http://127.0.0.1:5000/');
-                        //     var decodedData = jsonDecode(data);
-                        //     print(decodedData['query']);
-                        //     print('done');
-                        //   }
-                        //   else {
-                        //     print('failed to send');
-                        //   }
-                        // }
-                        // catch (e) {
-                        //   print('Error sending photo: ${e}');
-                        // }                        
-                        // var data = await res.stream.bytesToString();
-                        // showAlertDialog(context, decodedData['query']);
-                        // print(decodedData['query'][0]);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -116,4 +103,3 @@ class _homeState extends State<home> {
     );
   }
 }
-
