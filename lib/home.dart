@@ -60,10 +60,26 @@ class _homeState extends State<home> {
                         final ImagePicker _picker = ImagePicker();
                         final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
                         File file = File(PickedFile!.path); 
+
                         var request = http.MultipartRequest('POST', Uri.parse('http://127.0.0.1:5000/'));
-                        request.files.add(await http.MultipartFile.fromPath('imagefile', file.path));
-                        var res = await request.send();
+                        Map<String, String> headers = {"Content-type": "multipart/form-data"};
+                        request.files.add(
+                          await http.MultipartFile(
+                            'imagefile',
+                            file.readAsBytes().asStream(),
+                            file.lengthSync(),
+                            filename: "filename",
+                          )
+                        );
+                        request.headers.addAll(headers);
+                        print("request: " + request.toString());
+                        var data = request.send();
+                        print(data);
+                        print(data);
+                        //var res = await request.send();
                         print('post request made');
+                        //String responseBody = await res.stream.bytesToString();
+                        //print(responseBody);
 
                         // try {
                         //   print('waiting');
