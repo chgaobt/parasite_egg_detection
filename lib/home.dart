@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:requests/requests.dart';
-import 'package:dio/dio.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -84,18 +83,6 @@ class _homeState extends State<home> {
                         }
       
                         print('post request made');
-                        
-                        // var data = await http.get(Uri.parse('http://127.0.0.1:5000'));
-                        // if(data.statusCode == 200) {
-                        //   setState(() {
-                        //     count = jsonDecode(data.body);
-                        //     print(count);
-                        //   });
-                          
-                        // }
-                        // else {
-                        //   throw Exception('Failed to get from Flask server');
-                        // }
                       
                       },
                       child: Row(
@@ -107,7 +94,11 @@ class _homeState extends State<home> {
                     ),
                     Text(
                       'Number of parasite eggs were detected: $count',
-
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15
+                      ),
                     ),
                   ],
                 ), 
