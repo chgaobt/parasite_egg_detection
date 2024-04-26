@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
-import roboflow
+from roboflow import Roboflow
 import supervision as sv
 import tempfile
 import os
+import io
 app = Flask(__name__)
 
 @app.route("/", methods=['POST','GET'])
@@ -15,14 +16,20 @@ def home():
         
         try:
             imagefile = request.files['imagefile']
+        
             if imagefile.filename == '':
                 return 'No File Selected'
-            
+
+            file_bytes = imagefile.read()
+
+            with open('uploaded_img.jpeg','wb') as f:
+                f.write(file_bytes)
+
             temp_dir = tempfile.mkdtemp()
             temp_file_path = os.path.join(temp_dir, 'temp')
             imagefile.save(temp_file_path)
 
-            rf = roboflow(api_key="YoZtPvlGVyx3HEeaxQWT")
+            rf = Roboflow(api_key="YoZtPvlGVyx3HEeaxQWT")
             project = rf.workspace().project("ovos-de-parasitas-azoug")
             model = project.version(6).model
 
@@ -44,4 +51,3 @@ def home():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
-1

@@ -20,7 +20,7 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   String? imagePath; 
   XFile? image; 
-  int count = -1; 
+  String? count = ""; 
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +62,8 @@ class _homeState extends State<home> {
                         final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
                         File file = File(PickedFile!.path); 
 
+                        //phone ip adderess 172.20.10.2
+                        print(file.readAsBytes().asStream());
                         var request = http.MultipartRequest('POST', Uri.parse('http://172.20.10.2'));
                         Map<String, String> headers = {"Content-type": "multipart/form-data"};
                         request.files.add(
@@ -72,18 +74,19 @@ class _homeState extends State<home> {
                             filename: "filename",
                           )
                         );
+                
                         request.headers.addAll(headers);
                         print("request: " + request.toString());
                         var res = await request.send();
                         print('post request made with await');
                         
-                        //int count = -1; 
                         var data = await http.get(Uri.parse('http://172.20.10.2'));
                         if(data.statusCode == 200) {
                           setState(() {
                             count = jsonDecode(data.body);
+                            print(count);
                           });
-                          //count = 0;
+                          
                         }
                         else {
                           throw Exception('Failed to get from Flask server');
