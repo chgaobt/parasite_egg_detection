@@ -80,8 +80,10 @@ class _homeState extends State<home> {
                         //int count = -1; 
                         var data = await http.get(Uri.parse('http://172.20.10.2'));
                         if(data.statusCode == 200) {
-                          count = jsonDecode(data.body);
-                          count = 0;
+                          setState(() {
+                            count = jsonDecode(data.body);
+                          });
+                          //count = 0;
                         }
                         else {
                           throw Exception('Failed to get from Flask server');
