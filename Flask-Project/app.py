@@ -6,9 +6,9 @@ import tempfile
 import os
 import io
 app = Flask(__name__)
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+# app.config["SESSION_PERMANENT"] = False
+# app.config["SESSION_TYPE"] = "filesystem"
+# Session(app)
 
 @app.route("/", methods=['POST','GET'])
 def home():
@@ -42,7 +42,7 @@ def home():
 
             print(len(detections))
 
-            session['count'] = len(detections)
+            #session['count'] = len(detections)
             return jsonify(len(detections))
     
         except Exception as e:
