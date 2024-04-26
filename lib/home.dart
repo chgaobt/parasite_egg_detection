@@ -1,13 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:parasite_egg_detection/request.dart';
+import 'package:requests/requests.dart';
 import 'package:dio/dio.dart';
 
 class home extends StatefulWidget {
@@ -20,7 +17,7 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   String? imagePath; 
   XFile? image; 
-  String? count = ""; 
+  int? count; 
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,7 @@ class _homeState extends State<home> {
             ),
             Container(
               alignment: Alignment.center,
-              // height: 200,
+              // height: 150,
               // width: 150,
               child: Text(
                 'Select a Photo',
@@ -77,23 +74,29 @@ class _homeState extends State<home> {
                 
                         request.headers.addAll(headers);
                         print("request: " + request.toString());
-                        var res = await request.send();
-                        print('post request made with await');
-                        
-                        var data = await http.get(Uri.parse('http://172.20.10.2'));
-                        if(data.statusCode == 200) {
+                        var streamedResponse = await request.send();
+                        var res = await http.Response.fromStream(streamedResponse);
+                        final data = jsonDecode(res.body);
+                        if(res.statusCode == 200) {
                           setState(() {
-                            count = jsonDecode(data.body);
-                            print(count);
+                            count = data;
                           });
+                        }
+      
+                        print('post request made');
+                        
+                        // var data = await http.get(Uri.parse('http://127.0.0.1:5000'));
+                        // if(data.statusCode == 200) {
+                        //   setState(() {
+                        //     count = jsonDecode(data.body);
+                        //     print(count);
+                        //   });
                           
-                        }
-                        else {
-                          throw Exception('Failed to get from Flask server');
-                        }
+                        // }
+                        // else {
+                        //   throw Exception('Failed to get from Flask server');
+                        // }
                       
-                        print(count);
-
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -103,7 +106,8 @@ class _homeState extends State<home> {
                       )
                     ),
                     Text(
-                      'This many parasite eggs were detected: $count'
+                      'Number of parasite eggs were detected: $count',
+
                     ),
                   ],
                 ), 
