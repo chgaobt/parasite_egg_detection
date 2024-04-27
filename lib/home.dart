@@ -60,7 +60,7 @@ class _homeState extends State<home> {
 
                         //phone ip adderess 172.20.10.2
                         print(file.readAsBytes().asStream());
-                        var request = http.MultipartRequest('POST', Uri.parse('http://172.20.10.2'));
+                        var request = http.MultipartRequest('POST', Uri.parse('http://172.26.65.41'));
                         Map<String, String> headers = {"Content-type": "multipart/form-data"};
                         request.files.add(
                           await http.MultipartFile(
