@@ -32,9 +32,10 @@ class _homeState extends State<home> {
               )
             ),
             Container(
-              alignment: Alignment.center,
-              // height: 150,
+              //alignment: Alignment.center,
+              // height: 300,
               // width: 150,
+              padding: EdgeInsets.only(top: 300, left: 110),
               child: Text(
                 'Select a Photo',
                 textAlign: TextAlign.center,
@@ -50,7 +51,7 @@ class _homeState extends State<home> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 500,
+                      height: 400,
                     ),
                     ElevatedButton(
                       onPressed: () async {
@@ -60,7 +61,7 @@ class _homeState extends State<home> {
 
                         //phone ip adderess 172.20.10.2
                         print(file.readAsBytes().asStream());
-                        var request = http.MultipartRequest('POST', Uri.parse('http://172.26.65.41'));
+                        var request = http.MultipartRequest('POST', Uri.parse('http://172.20.10.2'));
                         Map<String, String> headers = {"Content-type": "multipart/form-data"};
                         request.files.add(
                           await http.MultipartFile(
@@ -93,13 +94,21 @@ class _homeState extends State<home> {
                       )
                     ),
                     Text(
-                      'Number of parasite eggs were detected: $count',
+                      'Number of parasite eggs detected: ',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 15
                       ),
                     ),
+                    Text(
+                      '$count',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 45
+                      ),
+                    )
                   ],
                 ), 
               )

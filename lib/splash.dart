@@ -48,7 +48,7 @@ class _splashState extends State<splash> with SingleTickerProviderStateMixin{
             Container(
               child: Column(
                 children: [
-                  SizedBox(height: 400),
+                  SizedBox(height: 300),
                   Center(
                     child: Text(
                       'Parasite Egg Detector',
