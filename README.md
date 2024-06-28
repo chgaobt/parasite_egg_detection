@@ -10,9 +10,8 @@ This flutter application can detect parasite eggs from photos of animal fecal sa
 
 ## Usage 
 
-<div id="header" align="center">
-  <img src="[https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif](https://github.com/chgaobt/parasite_egg_detection/blob/main/images/Flowchart.jpeg?raw=true)" width="100"/>
-</div>
+![image](https://github.com/chgaobt/parasite_egg_detection/blob/main/images/Flowchart.jpeg?raw=true)
+
 ### Flow
 1. User is prompted to upload a fecal sample image from their iPhone gallery
 2. Uploaded image is sent to a backend Python Flask project for processing
