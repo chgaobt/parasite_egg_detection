@@ -9,6 +9,10 @@ Inspiration for this project came from a local Charlottesville, Virginia fiber f
 This flutter application can detect parasite eggs from photos of animal fecal samples, streamlining farmers' diagnosis process. Currently, many farmers have to send fecal samples to a veterinarian, who will manually count the parasite eggs, and send the results back. This process commonly takes up to two weeks. 
 
 ## Usage 
+
+<div id="header" align="center">
+  <img src="[https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif](https://github.com/chgaobt/parasite_egg_detection/blob/main/images/Flowchart.jpeg?raw=true)" width="100"/>
+</div>
 ### Flow
 1. User is prompted to upload a fecal sample image from their iPhone gallery
 2. Uploaded image is sent to a backend Python Flask project for processing
