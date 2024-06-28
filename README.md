@@ -19,3 +19,6 @@ This flutter application can detect parasite eggs from photos of animal fecal sa
 4. Model will count the parasite eggs found and return the count
 5. Flutter application receives the count
 6. Count is displayed for the user to see
+
+## Credits
+Roboflow Model https://universe.roboflow.com/projetos-pessoais-3q4uz/ovos-de-parasitas-azoug/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
